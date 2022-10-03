@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CommunityToolkitMVVM.Views.ObservablePropertyPage"
+             xmlns:models="clr-namespace:CommunityToolkitMVVM.Models"
+             xmlns:vm="clr-namespace:CommunityToolkitMVVM.ViewModels"
+             x:DataType="vm:ObservablePropertyVM"
+             Title="ObservablePropertyPage">
+    <VerticalStackLayout Spacing="30" Margin="20" >
+        <Entry Placeholder="FirstName" Visual="true" Text="{Binding FirstName}" />
+        <Entry Placeholder="LastName" Visual="true" Text="{Binding LastName}" />
+        <Label Text="{Binding FullName}" HorizontalOptions="Center" />
+        <Button Text="GreetUser" Command="{Binding GreetUserCommand}" />
+    </VerticalStackLayout>
+</ContentPage>
