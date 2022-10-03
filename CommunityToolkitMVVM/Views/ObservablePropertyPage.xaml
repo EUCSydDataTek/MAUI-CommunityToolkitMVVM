@@ -6,6 +6,7 @@
              xmlns:vm="clr-namespace:CommunityToolkitMVVM.ViewModels"
              x:DataType="vm:ObservablePropertyVM"
              Title="ObservablePropertyPage">
+    
     <VerticalStackLayout Spacing="30" Margin="20" >
         <Entry Placeholder="FirstName" Visual="true" Text="{Binding FirstName}" />
         <Entry Placeholder="LastName" Visual="true" Text="{Binding LastName}" />

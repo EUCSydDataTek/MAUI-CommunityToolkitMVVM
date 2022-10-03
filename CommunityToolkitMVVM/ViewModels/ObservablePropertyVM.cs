@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkitMVVM.Models;
 using System.Diagnostics;
 
 namespace CommunityToolkitMVVM.ViewModels;
@@ -23,7 +22,6 @@ public partial class ObservablePropertyVM : ObservableObject
     private void GreetUser()
     {
         Shell.Current.DisplayAlert("Welcome!", $"Hello, {FullName}", "Ok");
-        
     }
 
     private bool CanGreetUser()
