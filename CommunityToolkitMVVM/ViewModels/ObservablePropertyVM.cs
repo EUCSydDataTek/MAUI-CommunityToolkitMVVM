@@ -31,11 +31,11 @@ public partial class ObservablePropertyVM : ObservableObject
 
     partial void OnFirstNameChanging(string value)
     {
-        Debug.WriteLine($"The name is about to change to {value}");
+        Debug.WriteLine($"The firstName is about to change to {value}");
     }
 
-    partial void OnLastNameChanged(string value)
+    partial void OnFirstNameChanged(string value)
     {
-        Debug.WriteLine($"The name just changed to {value}");
+        Debug.WriteLine($"The lastName just changed to {value}");
     }
 }
