@@ -18,6 +18,8 @@ public partial class ObservablePropertyVM : ObservableObject
     public string FullName => $"{FirstName} {LastName}";
 
 
+
+    // COMMANDS
     [RelayCommand(CanExecute = nameof(CanGreetUser))]
     private void GreetUser()
     {
@@ -29,6 +31,7 @@ public partial class ObservablePropertyVM : ObservableObject
         return firstName?.Length > 0 & lastName?.Length > 0;
     }
 
+    // PROPERTY CHANGING EVENTS
     partial void OnFirstNameChanging(string value)
     {
         Debug.WriteLine($"The firstName is about to change to {value}");
