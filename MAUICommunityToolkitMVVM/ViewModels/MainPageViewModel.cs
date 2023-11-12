@@ -1,67 +1,53 @@
-﻿using System.Windows.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Diagnostics;
 
 namespace MAUICommunityToolkitMVVM.ViewModels;
-public class MainPageViewModel : BaseViewModel
+public partial class MainPageViewModel : ObservableObject
 {
     #region PROPERTIES
-    string _firstName;
-    public string FirstName
-    {
-        get { return _firstName; }
-        set
-        {
-            SetProperty(ref _firstName, value);
-            FullName = $"{FirstName} {LastName}";
-            (GreetUserCommand as Command)?.ChangeCanExecute();
-        }
-    }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(FullName))]
+    [NotifyCanExecuteChangedFor(nameof(GreetUserCommand))]
+    private string firstName;
 
-    string _lastName;
-    public string LastName
-    {
-        get { return _lastName; }
-        set
-        {
-            SetProperty(ref _lastName, value);
-            FullName = $"{FirstName} {LastName}";
-            (GreetUserCommand as Command)?.ChangeCanExecute();
-        }
-    }
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(FullName))]
+    [NotifyCanExecuteChangedFor(nameof(GreetUserCommand))]
+    private string lastName;
 
-    string _fullName;
-    public string FullName
-    {
-        get { return _fullName; }
-        set
-        {
-            SetProperty(ref _fullName, value);
-        }
-    }
+    public string FullName => $"{FirstName} {LastName}";
     #endregion
 
     #region COMMANDS
-    // 1. Command with explicit Execute
-    private Command syncUICommand;
-    public ICommand SyncUICommand => syncUICommand ??= new Command(ExecuteSyncUICommand);
-
-    private void ExecuteSyncUICommand(object obj)
+    [RelayCommand]
+    private void SyncUI()
     {
         FirstName = "John";
         LastName = "Doe";
     }
 
-    // 2. Command with explicit Execute and CanExecute methods
-    private Command greetUserCommand;
-    public ICommand GreetUserCommand => greetUserCommand ??= new Command(ExecuteGreetUserCommand, CanExecuteGreetUserCommand);
-
-    private void ExecuteGreetUserCommand(object obj)
+    [RelayCommand(CanExecute = nameof(CanGreetUser))]
+    private void GreetUser()
     {
         Shell.Current.DisplayAlert("Welcome!", $"Hello, {FullName}", "Ok");
     }
 
-    private bool CanExecuteGreetUserCommand(object arg)
+    private bool CanGreetUser()
     {
         return FirstName?.Length > 0 & LastName?.Length > 0;
+    }
+    #endregion
+
+    #region PROPERTY CHANGING EVENTS
+    partial void OnFirstNameChanging(string value)
+    {
+        Debug.WriteLine($"The firstName is about to change to {value}");
+    }
+
+    partial void OnFirstNameChanged(string value)
+    {
+        Debug.WriteLine($"The lastName just changed to {value}");
     }
     #endregion
 }
