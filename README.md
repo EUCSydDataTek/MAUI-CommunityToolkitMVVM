@@ -84,7 +84,7 @@ hver af de properties, der indgår:
 8. Property Changing Events   
 Har man brug for at lave validering inden en property tilskrives eller udføre en handling efter, findes der events:
 
-    ```charp
+    ```csharp
     partial void OnFirstNameChanging(string value)
     {
         Debug.WriteLine($"The firstName is about to change to {value}");
